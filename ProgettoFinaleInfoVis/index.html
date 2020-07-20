@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Progetto InfoVis</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+	<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  
+</head>
+<body id="body">
+    <!-- The following file is needed for the streaming -->
+	<div id="titolo">
+		<h2><b>Mappa coropletica per la visualizzazione del Round Trip Time del Ping</b></h2>
+	</div>
+	<svg id="svg" width="400" height="300"></svg>
+	<div id="legenda"></div>
+	<script src="https://atlas-stream.ripe.net/socket.io.js"></script>
+	<script src="js/legenda.js"></script>
+	<script src="js/mappa.js"></script>
+	<script src="js/connessione.js"></script>
+	<div id="nome">
+		<h2><b>Fabiano D'Agostino</b></h2>
+	</div>
+	<div id="dati">Dati in streaming forniti dal progetto <a href="https://atlas.ripe.net/docs/result-streaming/" target="_blank"><b>Ripe Atlas</b></a></div>
+	<div id="ip">Servizio di geolocalizzazione dell'indirizzo IP destinazione <a href="https://ip-api.com/" target="_blank"><b>IP-API</b></a></div>
+	<div id="origine">Origine (Italia)</div>
+	<div id="rectangle"></div>
+	<div id="ND">N/D</div>
+	<div id="rectangle2"></div>
+	
+	
+</body>
+</html>

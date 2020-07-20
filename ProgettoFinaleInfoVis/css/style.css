@@ -1,0 +1,75 @@
+#body{
+	font-family:Arial;
+}
+
+#svg{
+	position:absolute;
+	top: 60px;
+}
+
+#legenda {
+	position:absolute;
+	bottom:180px;
+}
+
+#nome{
+
+  font-size : 10px;
+  position:absolute;
+  bottom: 20px;
+}
+
+#titolo{
+  font-size : 10px;
+  position:absolute;
+  top: 10px;
+}
+
+#rectangle {
+      width: 10px;
+      height: 10px;
+      background: #a8a3a3;
+	  position:absolute;
+	  bottom:196px;
+	  left: 400px;
+}
+
+#rectangle2 {
+      width: 10px;
+      height: 10px;
+      background: black;
+	  position:absolute;
+	  bottom:196px;
+	  left: 530px;
+}
+
+#origine {
+	  font-size: 11px;
+	  font-weight: bold;
+	  position:absolute;
+	  bottom:210px;
+	  left: 400px;
+}
+
+#ND {
+	  font-size: 11px;
+	  font-weight: bold;
+	  position:absolute;
+	  bottom:210px;
+	  left: 530px;
+}
+
+#dati {
+	  font-size: 11px;
+	  position:absolute;
+	  left:500px;
+	  top: 80px;
+}
+
+#ip {
+	  font-size: 11px;
+	  position:absolute;
+	  left:500px;
+	  top: 130px;
+}	
+	
