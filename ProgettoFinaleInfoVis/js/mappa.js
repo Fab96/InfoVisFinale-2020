@@ -4,7 +4,8 @@ width = +svg.attr("width"),
 height = +svg.attr("height")
 //creo mappa temporanea
 var tmp = d3.map();
-
+//array per memorizzare la varianza
+var tmpmappa = [];
 // Map and projection
 var path = d3.geoPath();
 //utilizzo la proiezione Mercatore
@@ -39,7 +40,10 @@ colorScale = d3.scaleThreshold()
 
 //creazione mappa
 function creamappa(mappa) {
-
+  //popolo tmpmappa
+  for (var i=0; i<mappa.length; i++) {
+    tmpmappa.push(mappa[i]);
+  }
 // Load external data and boot
 d3.queue()
 .defer(function f(callback) {
@@ -54,7 +58,6 @@ d3.queue()
 
 //popolo la mappa
 function popola(mappa,data,callback) {
-	
 	for (var i =0; i<mappa.length; i++) {
   	//esclude l'Italia (perchè origine) e valori RTT non validi (-1)
   	if (mappa[i].code.localeCompare("IT") !=0 && mappa[i].rtt !=-1) {
@@ -62,13 +65,16 @@ function popola(mappa,data,callback) {
   		if (tmp.has(mappa[i].code)) {
   			//tmp<code,[vecchio rtt + nuovo rtt,numero attuale record per quel code +1]>
   			tmp.set(mappa[i].code,[(tmp.get(mappa[i].code))[0]+mappa[i].rtt,(tmp.get(mappa[i].code))[1]+1]);
+        
+        
   		}
-  		else 
+      else {
   			//se tmp non ha il code del paese => tmp<code,[rtt,1(per la media degli rtt)]>
-  			tmp.set(mappa[i].code,[mappa[i].rtt,1]);
+        tmp.set(mappa[i].code,[mappa[i].rtt,1]);
+      }
 
-  	}
-  	
+    }
+
 
   }
   //calcolare la media del rtt per ciascun paese
@@ -102,5 +108,29 @@ function ready(error, topo) {
 
       	d.total = data.get(d.id);        
       	return colorScale(d.total);
-      });
-  }
+      })
+      //aggiunta label
+      .append("title")
+      .text(function (d) {
+       if ((d.id).localeCompare("IT")!=0) {
+         if (tmp.get(d.id)==undefined)
+          return d.id+"\nRTT:0\nVarianza:0\nMisurazioni:0";
+        else {
+                var sum=0;
+                var varianza=0;
+                for (var j=0; j<tmpmappa.length; j++) {
+                  if (tmpmappa[j].code.localeCompare(d.id)==0 && tmpmappa[j].rtt !=-1) {
+                    //calcolo numeratore varianza
+                    sum += Math.pow((tmpmappa[j].rtt-data.get(d.id)),2);
+                  };
+                  //calcolo varianza
+                  varianza = sum/tmp.get(d.id)[1];
+                  
+                }
+                return d.id+"\nRTT:"+data.get(d.id)+"\nVarianza:"+varianza+"\nMisurazioni:"+tmp.get(d.id)[1];
+
+
+              }
+            }
+          });
+    }
